@@ -51,7 +51,9 @@ export default function Home() {
       <main>
         <section
           id="home"
-          ref={(el) => (sectionRefs.current["home"] = el)}
+          ref={(el) => 
+            {sectionRefs.current["home"] = el
+          }}
           className="h-screen flex items-center justify-center"
         >
           <div className="text-center animate-fadeInUp">
@@ -62,7 +64,7 @@ export default function Home() {
 
         <section
           id="about"
-          ref={(el) => (sectionRefs.current["about"] = el)}
+          ref={(el) => {sectionRefs.current["about"] = el}}
           className="min-h-screen flex items-center justify-center bg-zinc-900"
         >
           <div className="max-w-3xl mx-auto px-6 animate-fadeInUp">
@@ -76,7 +78,7 @@ export default function Home() {
 
         <section
           id="projects"
-          ref={(el) => (sectionRefs.current["projects"] = el)}
+          ref={(el) => {sectionRefs.current["projects"] = el}}
           className="min-h-screen flex items-center justify-center"
         >
           <div className="max-w-5xl mx-auto px-6">
@@ -101,7 +103,9 @@ export default function Home() {
 
         <section
           id="contact"
-          ref={(el) => (sectionRefs.current["contact"] = el)}
+          ref={(el) => 
+            {sectionRefs.current["contact"] = el
+          }}
           className="min-h-screen flex items-center justify-center bg-zinc-900"
         >
           <div className="text-center animate-fadeInUp">
