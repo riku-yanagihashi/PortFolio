@@ -1,6 +1,6 @@
 "use client"
 
-import { Github, Linkedin, Mail } from "lucide-react"
+import { Github, Mail } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import BackgroundEffect from "./components/BackgroundEffect"
@@ -68,8 +68,8 @@ export default function Home() {
           <div className="max-w-3xl mx-auto px-6 animate-fadeInUp">
             <h2 className="text-4xl font-bold mb-8 neon-text">About Me</h2>
             <p className="text-xl leading-relaxed">
-              Hello! I'm Riku Yanagihashi, a 2nd year student at Tecnnical College. I'm passionate about technology and
-              I'm always looking for new ways to improve my skills.
+              Hello! I&apos;m Riku Yanagihashi, a 2nd year student at Technical College. I&apos;m passionate about technology and
+              I&apos;m always looking for new ways to improve my skills.
             </p>
           </div>
         </section>
@@ -106,7 +106,7 @@ export default function Home() {
         >
           <div className="text-center animate-fadeInUp">
             <h2 className="text-4xl font-bold mb-8 neon-text">Get In Touch</h2>
-            <p className="text-xl mb-8">Interested in collaborating? Let's connect!</p>
+            <p className="text-xl mb-8">Interested in collaborating? Let&apos;s connect!</p>
             <div className="flex justify-center space-x-6">
               <Link href="https://github.com/riku-yanagihashi" className="text-gray-400 hover:text-white transition-colors">
                 <Github className="w-8 h-8" />

@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useEffect, useRef } from "react"
-import { lerp, clamp } from "../utils/animations"
+import { lerp } from "../utils/animations"
 
 const BackgroundEffect: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
