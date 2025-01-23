@@ -1,5 +1,6 @@
-![](./image/scs.png)(https://riku-yanagihashi.vercel.app/)
+![](./image/scs.png)
 
 # My Portfolio Website
 
 ## Website URL
+[](https://riku-yanagihashi.vercel.app/)
