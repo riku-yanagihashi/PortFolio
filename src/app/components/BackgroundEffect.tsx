@@ -70,12 +70,12 @@ const BackgroundEffect: React.FC = () => {
 
         if (distance < maxDistance) {
           const a = (1 - distance / maxDistance) * 0.5
-          ctx.fillStyle = `rgba(100, 200, 255, ${a})`
+          ctx.fillStyle = `rgba(100, 200, 255, ${a * 1.5})`
           ctx.beginPath()
           ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2)
           ctx.fill()
 
-          ctx.strokeStyle = `rgba(100, 200, 255, ${a * 0.2})`
+          ctx.strokeStyle = `rgba(100, 200, 255, ${a * 1})`
           ctx.beginPath()
           ctx.moveTo(particle.x, particle.y)
           ctx.lineTo(currentX, currentY)
