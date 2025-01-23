@@ -112,11 +112,11 @@ export default function Home() {
             <h2 className="text-4xl font-bold mb-8 neon-text">Get In Touch</h2>
             <p className="text-xl mb-8">Interested in collaborating? Let&apos;s connect!</p>
             <div className="flex justify-center space-x-6">
-              <Link href="https://github.com/riku-yanagihashi" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="https://github.com/riku-yanagihashi" target="_blank" className="text-gray-400 hover:text-white transition-colors">
                 <Github className="w-8 h-8" />
                 <span className="sr-only">GitHub</span>
               </Link>
-              <Link href="mailto:riku.yanagihashi0420@gmail.com" className="text-gray-400 hover:text-white transition-colors">
+              <Link href="mailto:riku.yanagihashi0420@gmail.com" target="_blank" className="text-gray-400 hover:text-white transition-colors">
                 <Mail className="w-8 h-8" />
                 <span className="sr-only">Email</span>
               </Link>
