@@ -9,8 +9,8 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "Engineer Portfolio",
-  description: "A portfolio showcasing my engineering projects and skills",
+  title: "Riku's Portfolio",
+  description: "Riku Yanagihashi's portfolio",
 }
 
 export default function RootLayout({

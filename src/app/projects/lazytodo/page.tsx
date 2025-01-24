@@ -34,7 +34,7 @@ export default function LazyToDoProject() {
           <div className="mb-8 animate-fadeInUp" style={{ animationDelay: "0.1s" }}>
             <div className="flex space-x-4 mb-4">
               <a
-                href="https://github.com/yourusername/lazytodo"
+                href="https://github.com/riku-yanagihashi/Lazy-todo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded transition-colors"
@@ -46,7 +46,7 @@ export default function LazyToDoProject() {
                 href="https://lazytodo-demo.vercel.app"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded transition-colors"
+                className="flex items-center bg-gray-600 pointer-events-none hover:bg-blue-500 text-white font-bold py-2 px-4 rounded transition-colors"
               >
                 <ExternalLink className="w-5 h-5 mr-2" />
                 Live Demo
@@ -77,13 +77,15 @@ export default function LazyToDoProject() {
               <div>
                 <h2 className="text-2xl font-semibold mb-4">About LazyToDo</h2>
                 <p className="text-gray-300 mb-4">
-                  LazyToDo is a minimalist, yet powerful task management application designed for procrastinators and
-                  efficiency enthusiasts alike. It combines sleek design with intelligent task prioritization to help
-                  users focus on what truly matters.
+                  LazyTodo is a Todo application developed for lazy people.
+                  Engineers, in particular, tend to strive for efficiency and become lazy, so this app is designed with such individuals in mind.
+                  The application runs in the terminal, allowing users who frequently use editors like Vim or VSCode to open and manage their Todo lists with a single command.
+                  Additionally, since it can be operated without touching a mouse, this feature is especially beneficial for lazy users.
                 </p>
                 <p className="text-gray-300">
-                  Built with modern web technologies, LazyToDo offers a seamless experience across devices, ensuring
-                  that your tasks are always at your fingertips, whether you&apos;re on your desktop, tablet, or smartphone.
+                  The application is written entirely in Rust, ensuring high-speed and safe execution of the program.
+                  The Todo data is stored in JSON format in the current directory, making file management intuitive.
+                  However, a potential drawback is that the JSON file might feel intrusive at times, but please avoid deleting it.
                 </p>
               </div>
             )}
@@ -93,12 +95,12 @@ export default function LazyToDoProject() {
                 <h2 className="text-2xl font-semibold mb-4">Key Features</h2>
                 <ul className="space-y-2">
                   {[
-                    "Intelligent task prioritization",
-                    "Cross-device synchronization",
-                    "Customizable categories and tags",
+                    "Terminal-based operation",
+                    "Mouse-free navigation",
+                    "Lightweight and fast",
                     "Dark mode for late-night productivity",
-                    "Voice input for hands-free task creation",
-                    "Pomodoro timer integration",
+                    "JSON-based data storage",
+                    "Quick setup and usage",
                   ].map((feature, index) => (
                     <li key={index} className="flex items-center">
                       <CheckCircle className="w-5 h-5 mr-2 text-green-500" />
@@ -113,12 +115,12 @@ export default function LazyToDoProject() {
               <div>
                 <h2 className="text-2xl font-semibold mb-4">How to Use LazyToDo</h2>
                 <ol className="list-decimal list-inside space-y-2 text-gray-300">
-                  <li>Sign up for an account or log in if you already have one.</li>
-                  <li>Create a new task by clicking the + button or using voice input.</li>
-                  <li>Set priority, due date, and add any relevant tags or categories.</li>
-                  <li>Let LazyToDo&apos;s AI suggest the best order to tackle your tasks.</li>
-                  <li>Start your focused work session with the integrated Pomodoro timer.</li>
-                  <li>Mark tasks as complete and watch your productivity soar!</li>
+                  <li>Please type on terminal `brew tap riku-yanagihashi/ltd && brew install ltd`</li>
+                  <li>This concludes the installation.</li>
+                  <li>Next, we explain how to operate the system.</li>
+                  <li>Its basically the same cursor control as the vim.</li>
+                  <li>q to exit the application, a to add a task, e to edit, d to delete</li>
+                  <li>See the README on github for details.</li>
                 </ol>
               </div>
             )}
@@ -128,12 +130,7 @@ export default function LazyToDoProject() {
                 <h2 className="text-2xl font-semibold mb-4">Tech Stack</h2>
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { name: "React", icon: <Code className="w-5 h-5" /> },
-                    { name: "Next.js", icon: <Zap className="w-5 h-5" /> },
-                    { name: "TypeScript", icon: <Code className="w-5 h-5" /> },
-                    { name: "Tailwind CSS", icon: <Code className="w-5 h-5" /> },
-                    { name: "Node.js", icon: <Zap className="w-5 h-5" /> },
-                    { name: "MongoDB", icon: <Code className="w-5 h-5" /> },
+                    { name: "Rust", icon: <Code className="w-5 h-5" /> },
                   ].map((tech, index) => (
                     <div key={index} className="flex items-center bg-gray-800 rounded p-3">
                       {tech.icon}
