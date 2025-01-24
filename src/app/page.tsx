@@ -185,7 +185,7 @@ function HomeContent() {
         >
           <div className="max-w-3xl mx-auto px-6 animate-fadeInUp">
             <h2 className="text-4xl font-bold mb-8 neon-text font-noto-sans-jp">{t("aboutMe")}</h2>
-            <p className="text-xl leading-relaxed font-noto-sans-jp">{t("aboutContent")}</p>
+            <p style={{ whiteSpace: "pre-wrap" }} className="text-xl leading-relaxed font-noto-sans-jp">{t("aboutContent")}</p>
           </div>
         </section>
 

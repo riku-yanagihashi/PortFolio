@@ -7,8 +7,16 @@ export const translations = {
     name: "Riku Yanagihashi",
     title: "Technical College Student",
     aboutMe: "About Me",
-    aboutContent:
-      "Hello! I'm Riku Yanagihashi, a 2nd year student at Technical College. I'm passionate about technology and I'm always looking for new ways to improve my skills.",
+    aboutContent: `I am a high school student 
+born and raised in Tokyo, currently studying programming.
+
+I am 17 years old and in my second year of high school. Next year, 
+I will be preparing for university entrance exams to pursue a degree in the humanities.
+
+Backend: Java, Python, C#
+Frontend: React, Next.js, Django, Flask, TailwindCSS
+Virtual Environments: Docker, pyenv, venv
+Version Control: GitHub`,
     getInTouch: "Get In Touch",
     connectMessage: "Interested in collaborating? Let's connect!",
     learnMore: "Learn more →",
@@ -25,8 +33,13 @@ export const translations = {
     name: "柳橋 莉空",
     title: "現役高専生",
     aboutMe: "About Me",
-    aboutContent:
-      "東京出身東京育ちのプログラミング勉強中の学生です。現在17歳で高校二年生、来年は文系の大学を受験するために受験勉強も行っています。",
+    aboutContent: `東京出身東京育ちのプログラミング勉強中の学生です。
+現在17歳で高校二年生、来年は文系の大学を受験するために受験勉強も行っています。
+
+バックエンド: Java, Python, C#
+フロントエンド: React, Next.js, Django, Flask, TailwindCSS
+仮想環境: Docker, pyenv, venv
+バージョン管理: GitHub`,
     getInTouch: "Get In Touch",
     connectMessage: "お仕事の連絡などはこちらから",
     learnMore: "詳細を見る →",
@@ -35,7 +48,6 @@ export const translations = {
     technicalSkills: "技術スキル",
     softSkills: "ソフトスキル",
   },
-}
+};
 
-export type TranslationKey = keyof typeof translations.en
-
+export type TranslationKey = keyof typeof translations.en;
