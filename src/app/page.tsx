@@ -4,55 +4,60 @@ import { Github, Mail } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
 import BackgroundEffect from "./components/BackgroundEffect"
+import { LanguageProvider, useLanguage } from "./contexts/LanguageContext"
+import { translations, type TranslationKey } from "./utils/translations"
+import { SkillsRadar } from "./components/SkillsRader"
 
-export default function Home() {
+const projects = [
+  {
+    id: 1,
+    title: "Lazy Todo",
+    description: "Cool todo app for lazy people",
+    link: "/projects/lazytodo",
+    technologies: ["Rust"],
+  },
+  {
+    id: 2,
+    title: 'Django Project "Dpro"',
+    description: "Web application to search books",
+    link: "/projects/Dpro",
+    technologies: ["Django", "PostgreSQL"],
+  },
+  {
+    id: 3,
+    title: "My Portfolio Website",
+    description: "Portfolio created with Next.js+React+TailwindCSS+TypeScript",
+    link: "/",
+    technologies: ["Next.js", "React", "TailwindCSS", "TypeScript"],
+  },
+  {
+    id: 4,
+    title: "Project Four",
+    description: "Description for project four.",
+    link: "/projects/four",
+    technologies: [],
+  },
+]
+
+const technologyIcons: { [key: string]: string } = {
+  React: "https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg",
+  TypeScript: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg",
+  "Next.js": "https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg",
+  TailwindCSS: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg",
+  Django: "https://upload.wikimedia.org/wikipedia/commons/7/75/Django_logo.svg",
+  PostgreSQL: "https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg",
+  "Node.js": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg",
+  MongoDB: "https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg",
+  Rust: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg",
+  Java: "https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg",
+}
+
+function HomeContent() {
   const [activeSection, setActiveSection] = useState("")
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({})
+  const { language, setLanguage } = useLanguage()
 
-  const projects = [
-    {
-      id: 1,
-      title: 'Lazy Todo',
-      description: 'Cool todo app for lazy people',
-      link: '/projects/one',
-      technologies: ['Rust'],
-    },
-    {
-      id: 2,
-      title: 'Django Project "Dpro"',
-      description: 'Web application to search books',
-      link: '/projects/two',
-      technologies: ['Django', 'PostgreSQL'],
-    },
-    {
-      id: 3,
-      title: 'My Portfolio Website',
-      description: 'Portfolio created with Next.js+React+TailwindCSS+TypeScript',
-      link: '/projects/three',
-      technologies: ['Next.js', 'React', 'TailwindCSS', 'TypeScript'],
-    },
-    {
-      id: 4,
-      title: 'Project Four',
-      description: 'Description for project four.',
-      link: '/projects/four',
-      technologies: [],
-    },
-  ];
-
-  const technologyIcons: { [key: string]: string } = {
-    'React': 'https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg',
-    'TypeScript': 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg',
-    'Next.js': 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Nextjs-logo.svg',
-    'TailwindCSS': 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg',
-    'Django': 'https://upload.wikimedia.org/wikipedia/commons/7/75/Django_logo.svg',
-    'PostgreSQL': 'https://upload.wikimedia.org/wikipedia/commons/2/29/Postgresql_elephant.svg',
-    'Node.js': 'https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg',
-    'MongoDB': 'https://upload.wikimedia.org/wikipedia/commons/9/93/MongoDB_Logo.svg',
-    'Rust': 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Rust_programming_language_black_logo.svg',
-    'Java': 'https://upload.wikimedia.org/wikipedia/en/3/30/Java_programming_language_logo.svg',
-  };
-
+  const t = (key: TranslationKey) => translations[language][key]
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -73,57 +78,109 @@ export default function Home() {
     return () => observer.disconnect()
   }, [])
 
+  const skillsData = {
+    technical: {
+      labels: ["JavaScript", "React", "Node.js", "Python", "SQL", "DevOps"],
+      datasets: [
+        {
+          label: "Current Skills",
+          data: [4, 3, 3, 4, 3, 2],
+          backgroundColor: "rgba(54, 162, 235, 0.2)",
+          borderColor: "rgb(54, 162, 235)",
+          borderWidth: 1,
+        },
+        {
+          label: "Target Skills",
+          data: [5, 5, 4, 5, 4, 4],
+          backgroundColor: "rgba(255, 99, 132, 0.2)",
+          borderColor: "rgb(255, 99, 132)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    soft: {
+      labels: ["Communication", "Teamwork", "Problem Solving", "Adaptability", "Creativity", "Time Management"],
+      datasets: [
+        {
+          label: "Current Skills",
+          data: [3, 4, 4, 3, 4, 3],
+          backgroundColor: "rgba(75, 192, 192, 0.2)",
+          borderColor: "rgb(75, 192, 192)",
+          borderWidth: 1,
+        },
+        {
+          label: "Target Skills",
+          data: [5, 5, 5, 4, 5, 4],
+          backgroundColor: "rgba(255, 206, 86, 0.2)",
+          borderColor: "rgb(255, 206, 86)",
+          borderWidth: 1,
+        },
+      ],
+    },
+  }
+
   return (
-    <div className="min-h-screen">
+    <div className={`min-h-screen ${language === "ja" ? "font-sans" : "font-serif"}`}>
       <BackgroundEffect />
       <header className="fixed w-full bg-black bg-opacity-50 backdrop-blur-md z-10">
-        <nav className="container mx-auto px-6 py-4">
-          <ul className="flex justify-center space-x-8">
-            {["home", "about", "projects", "contact"].map((section) => (
+        <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <ul className="flex space-x-8">
+            {["home", "about", "projects", "skills", "contact"].map((section) => (
               <li key={section}>
                 <Link
                   href={`#${section}`}
                   className={`hover:text-blue-400 transition-colors ${activeSection === section ? "neon-text" : ""}`}
                 >
-                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                  {t(section as TranslationKey)}
                 </Link>
               </li>
             ))}
           </ul>
+          <button
+            onClick={() => setLanguage(language === "en" ? "ja" : "en")}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded transition-colors"
+          >
+            {language === "en" ? "日本語" : "English"}
+          </button>
         </nav>
       </header>
 
       <main>
         <section
           id="home"
-          ref={(el) => 
-            {sectionRefs.current["home"] = el
+          ref={(el) => {
+            sectionRefs.current["home"] = el
           }}
           className="h-screen flex items-center justify-center"
         >
           <div className="text-center animate-fadeInUp">
-            <h1 className="text-6xl font-bold mb-4 neon-text">Riku Yanagihashi</h1>
-            <p className="text-2xl text-gray-400">Tecnnical College Student</p>
+            <h1 className="text-6xl font-bold mb-4 neon-text">{t("name")}</h1>
+            <p className="text-2xl text-gray-400">{t("title")}</p>
           </div>
         </section>
 
         <section
           id="about"
-          ref={(el) => {sectionRefs.current["about"] = el}}
+          ref={(el) => {
+            sectionRefs.current["about"] = el
+          }}
           className="min-h-screen flex items-center justify-center bg-zinc-900"
         >
           <div className="max-w-3xl mx-auto px-6 animate-fadeInUp">
-            <h2 className="text-4xl font-bold mb-8 neon-text">About Me</h2>
-            <p className="text-xl leading-relaxed">
-              Hello! I&apos;m Riku Yanagihashi, a 2nd year student at Technical College. I&apos;m passionate about technology and
-              I&apos;m always looking for new ways to improve my skills.
-            </p>
+            <h2 className="text-4xl font-bold mb-8 neon-text">{t("aboutMe")}</h2>
+            <p className="text-xl leading-relaxed">{t("aboutContent")}</p>
           </div>
         </section>
 
-        <section id="projects" ref={(el) => { sectionRefs.current["projects"] = el }} className="min-h-screen flex items-center justify-center">
+        <section
+          id="projects"
+          ref={(el) => {
+            sectionRefs.current["projects"] = el
+          }}
+          className="min-h-screen flex items-center justify-center"
+        >
           <div className="max-w-5xl mx-auto px-6">
-            <h2 className="text-4xl font-bold mb-12 text-center neon-text animate-fadeInUp">Projects</h2>
+            <h2 className="text-4xl font-bold mb-12 text-center neon-text animate-fadeInUp">{t("projects")}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {projects.map((project, index) => (
                 <div
@@ -137,7 +194,7 @@ export default function Home() {
                     {project.technologies.map((tech) => (
                       <img
                         key={tech}
-                        src={technologyIcons[tech]}
+                        src={technologyIcons[tech] || "/placeholder.svg"}
                         alt={tech}
                         className="h-8 w-8"
                         title={tech}
@@ -145,7 +202,7 @@ export default function Home() {
                     ))}
                   </div>
                   <Link href={project.link} className="text-blue-400 hover:underline">
-                    Learn more →
+                    {t("learnMore")}
                   </Link>
                 </div>
               ))}
@@ -154,21 +211,53 @@ export default function Home() {
         </section>
 
         <section
+          id="skills"
+          ref={(el) => {
+            sectionRefs.current["skills"] = el
+          }}
+          className="min-h-screen flex items-center justify-center bg-zinc-900"
+        >
+          <div className="max-w-6xl mx-auto px-6">
+            <h2 className="text-4xl font-bold mb-12 text-center neon-text animate-fadeInUp">{t("skills")}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <SkillsRadar
+                title={t("technicalSkills")}
+                labels={skillsData.technical.labels}
+                datasets={skillsData.technical.datasets}
+              />
+              <SkillsRadar
+                title={t("softSkills")}
+                labels={skillsData.soft.labels}
+                datasets={skillsData.soft.datasets}
+              />
+            </div>
+          </div>
+        </section>
+
+        <section
           id="contact"
-          ref={(el) => 
-            {sectionRefs.current["contact"] = el
+          ref={(el) => {
+            sectionRefs.current["contact"] = el
           }}
           className="min-h-screen flex items-center justify-center bg-zinc-900"
         >
           <div className="text-center animate-fadeInUp">
-            <h2 className="text-4xl font-bold mb-8 neon-text">Get In Touch</h2>
-            <p className="text-xl mb-8">Interested in collaborating? Let&apos;s connect!</p>
+            <h2 className="text-4xl font-bold mb-8 neon-text">{t("getInTouch")}</h2>
+            <p className="text-xl mb-8">{t("connectMessage")}</p>
             <div className="flex justify-center space-x-6">
-              <Link href="https://github.com/riku-yanagihashi" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="https://github.com/riku-yanagihashi"
+                target="_blank"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <Github className="w-8 h-8" />
                 <span className="sr-only">GitHub</span>
               </Link>
-              <Link href="mailto:riku.yanagihashi0420@gmail.com" target="_blank" className="text-gray-400 hover:text-white transition-colors">
+              <Link
+                href="mailto:riku.yanagihashi0420@gmail.com"
+                target="_blank"
+                className="text-gray-400 hover:text-white transition-colors"
+              >
                 <Mail className="w-8 h-8" />
                 <span className="sr-only">Email</span>
               </Link>
@@ -178,9 +267,19 @@ export default function Home() {
       </main>
 
       <footer className="bg-black py-6 text-center">
-        <p>&copy; {new Date().getFullYear()} Riku Yanagihashi. All rights reserved.</p>
+        <p>
+          &copy; {new Date().getFullYear()} Riku Yanagihashi. {t("allRightsReserved")}
+        </p>
       </footer>
     </div>
+  )
+}
+
+export default function Home() {
+  return (
+    <LanguageProvider>
+      <HomeContent />
+    </LanguageProvider>
   )
 }
 
