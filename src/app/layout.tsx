@@ -3,7 +3,10 @@ import { Space_Mono, Noto_Sans_JP } from "next/font/google"
 import "./globals.css"
 
 const spaceMono = Space_Mono({ subsets: ["latin"], weight: ["400", "700"] })
-const notoSansJP = Noto_Sans_JP({ subsets: ["latin"] })
+const notoSansJP = Noto_Sans_JP({
+  subsets: ["latin"],
+  variable: "--font-noto-sans-jp", // variable を指定
+});
 
 export const metadata: Metadata = {
   title: "Engineer Portfolio",

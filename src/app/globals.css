@@ -5,6 +5,7 @@
 @layer base {
   body {
     @apply bg-black text-white;
+    font-family: var(--font-noto-sans-jp), sans-serif; /* フォント指定を追加 */
   }
 }
 
@@ -42,5 +43,9 @@
 
 .animate-fadeInUp {
   animation: fadeInUp 0.6s ease-out;
+}
+
+.font-noto-sans-jp {
+  font-family: var(--font-noto-sans-jp), sans-serif;
 }
 
