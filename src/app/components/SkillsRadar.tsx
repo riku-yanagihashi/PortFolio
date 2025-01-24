@@ -47,6 +47,9 @@ export const SkillsRadar: React.FC<SkillsRadarProps> = ({ title, labels, dataset
           color: "rgba(255, 255, 255, 0.7)",
           backdropColor: "transparent",
         },
+        // 最小値と最大値を設定
+        min: 0, // 最小値を0に固定
+        max: 10, // 最大値を10に固定
       },
     },
     plugins: {

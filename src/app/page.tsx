@@ -3,10 +3,12 @@
 import { Github, Mail } from "lucide-react"
 import Link from "next/link"
 import { useEffect, useRef, useState } from "react"
+import { useRouter } from "next/navigation"
 import BackgroundEffect from "./components/BackgroundEffect"
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext"
 import { translations, type TranslationKey } from "./utils/translations"
 import { SkillsRadar } from "./components/SkillsRadar"
+import TransitionAnimation from "./components/TransitionAnimation"
 
 const projects = [
   {
@@ -55,8 +57,11 @@ const technologyIcons: { [key: string]: string } = {
 function HomeContent() {
   const [activeSection, setActiveSection] = useState("")
   const [isLoading, setIsLoading] = useState(true)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [hasVisitedBefore, setHasVisitedBefore] = useState(false)
   const sectionRefs = useRef<{ [key: string]: HTMLElement | null }>({})
   const { language, setLanguage } = useLanguage()
+  const router = useRouter()
 
   const t = (key: TranslationKey) => translations[language][key]
 
@@ -76,16 +81,29 @@ function HomeContent() {
       if (ref) observer.observe(ref)
     })
 
-    // Opening animation
-    const timer = setTimeout(() => {
+    // Check if user has visited before
+    const visited = localStorage.getItem("hasVisited")
+    if (visited) {
+      setHasVisitedBefore(true)
       setIsLoading(false)
-    }, 2000)
-
-    return () => {
-      observer.disconnect()
-      clearTimeout(timer)
+    } else {
+      // Opening animation
+      const timer = setTimeout(() => {
+        setIsLoading(false)
+        localStorage.setItem("hasVisited", "true")
+      }, 2000)
+      return () => clearTimeout(timer)
     }
+
+    return () => observer.disconnect()
   }, [])
+
+  const handleProjectClick = (link: string) => {
+    setIsTransitioning(true)
+    setTimeout(() => {
+      router.push(link)
+    }, 500)
+  }
 
   const skillsData = {
     technical: {
@@ -93,14 +111,14 @@ function HomeContent() {
       datasets: [
         {
           label: "Current Skills",
-          data: [1, 3, 3, 3, 4, 5],
+          data: [4, 6, 6, 7, 7, 9],
           backgroundColor: "rgba(54, 162, 235, 0.2)",
           borderColor: "rgb(54, 162, 235)",
           borderWidth: 1,
         },
         {
           label: "Target Skills",
-          data: [4, 5, 4, 3, 5, 5],
+          data: [5, 9, 9, 7, 9, 10],
           backgroundColor: "rgba(255, 99, 132, 0.2)",
           borderColor: "rgb(255, 99, 132)",
           borderWidth: 1,
@@ -108,18 +126,18 @@ function HomeContent() {
       ],
     },
     soft: {
-      labels: ["Communication", "Teamwork", "Problem Solving", "Adaptability", "Creativity", "Time Management"],
+      labels: ["Communication", "Teamwork", "Problem Solving", "Adaptability", "Creativity", "Time Manage"],
       datasets: [
         {
           label: "Current Skills",
-          data: [3, 4, 4, 3, 2, 5],
+          data: [6, 7, 7, 5, 3, 6.5],
           backgroundColor: "rgba(75, 192, 192, 0.2)",
           borderColor: "rgb(75, 192, 192)",
           borderWidth: 1,
         },
         {
           label: "Target Skills",
-          data: [5, 5, 5, 5, 5, 4],
+          data: [10, 9, 10, 10, 9.8, 8],
           backgroundColor: "rgba(255, 206, 86, 0.2)",
           borderColor: "rgb(255, 206, 86)",
           borderWidth: 1,
@@ -128,7 +146,7 @@ function HomeContent() {
     },
   }
 
-  if (isLoading) {
+  if (isLoading && !hasVisitedBefore) {
     return (
       <div className="fixed inset-0 bg-black flex items-center justify-center">
         <div className="text-4xl font-bold text-white animate-pulse">Welcome to My Portfolio</div>
@@ -139,6 +157,7 @@ function HomeContent() {
   return (
     <div className={`min-h-screen ${language === "ja" ? "font-noto-sans-jp" : "font-serif"}`}>
       <BackgroundEffect />
+      <TransitionAnimation isTransitioning={isTransitioning} />
       <header className="fixed w-full bg-black bg-opacity-50 backdrop-blur-md z-10">
         <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
           <ul className="flex space-x-8 font-noto-sans-jp">
@@ -172,7 +191,7 @@ function HomeContent() {
         >
           <div className="text-center animate-fadeInUp">
             <h1 className="text-6xl font-bold mb-4 neon-text font-noto-sans-jp">{t("name")}</h1>
-            <p className="text-2xl text-gray-400 font-noto-sans-jp">{t("title")}</p>
+            <p className="text-2xl text-gray-400">{t("title")}</p>
           </div>
         </section>
 
@@ -185,7 +204,7 @@ function HomeContent() {
         >
           <div className="max-w-3xl mx-auto px-6 animate-fadeInUp">
             <h2 className="text-4xl font-bold mb-8 neon-text font-noto-sans-jp">{t("aboutMe")}</h2>
-            <p className="text-xl leading-relaxed font-noto-sans-jp">{t("aboutContent")}</p>
+            <p style={{ whiteSpace: "pre-wrap" }} className="text-xl leading-relaxed font-noto-sans-jp">{t("aboutContent")}</p>
           </div>
         </section>
 
@@ -197,7 +216,9 @@ function HomeContent() {
           className="min-h-screen flex items-center justify-center"
         >
           <div className="max-w-5xl mx-auto px-6">
-            <h2 className="text-4xl font-bold mb-12 text-center neon-text animate-fadeInUp font-noto-sans-jp">{t("projects")}</h2>
+            <h2 className="text-4xl font-bold mb-12 text-center neon-text animate-fadeInUp font-noto-sans-jp">
+              {t("projects")}
+            </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {projects.map((project, index) => (
                 <div
@@ -218,9 +239,9 @@ function HomeContent() {
                       />
                     ))}
                   </div>
-                  <Link href={project.link} className="text-blue-400 hover:underline">
+                  <button onClick={() => handleProjectClick(project.link)} className="text-blue-400 hover:underline">
                     {t("learnMore")}
-                  </Link>
+                  </button>
                 </div>
               ))}
             </div>
