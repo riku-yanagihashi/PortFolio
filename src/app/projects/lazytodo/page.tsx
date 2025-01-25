@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { ArrowLeft, Github, ExternalLink, Code, CheckCircle, Zap } from "lucide-react"
+import { ArrowLeft, Github, ExternalLink, Code, CheckCircle } from "lucide-react"
 import BackgroundEffect from "../../components/BackgroundEffect"
 
 export default function LazyToDoProject() {
@@ -20,7 +20,9 @@ export default function LazyToDoProject() {
       <BackgroundEffect />
       <header className="fixed w-full bg-black bg-opacity-50 backdrop-blur-md z-10">
         <nav className="container mx-auto px-6 py-4">
-          <Link href="/#projects" className="text-blue-400 hover:text-blue-300 transition-colors flex items-center">
+          <Link href="/#projects" 
+            scroll={false}
+            className="text-blue-400 hover:text-blue-300 transition-colors flex items-center">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Projects
           </Link>
@@ -145,7 +147,7 @@ export default function LazyToDoProject() {
       </main>
 
       <footer className="bg-zinc-900 py-6 text-center">
-        <p>&copy; {new Date().getFullYear()} John Doe. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Riku Yanagihashi. All rights reserved.</p>
       </footer>
     </div>
   )

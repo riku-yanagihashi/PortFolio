@@ -148,7 +148,7 @@ export default function DproProject() {
       </main>
 
       <footer className="bg-zinc-900 py-6 text-center">
-        <p>&copy; {new Date().getFullYear()} John Doe. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Riku Yanagihashi. All rights reserved.</p>
       </footer>
     </div>
   )
